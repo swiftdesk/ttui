@@ -1,6 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {Routes, RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HireComponent } from './hire/hire.component';
@@ -15,32 +14,25 @@ import { PlatformComponent } from './platform/platform.component';
 import { ManagementComponent } from './platform/management/management.component';
 import { TopTalentComponent } from './platform/top-talent/top-talent.component';
 
-import {AppRoutingModule} from './app-routing.module';
-import { AssuritygitComponent } from './platform/assuritygit/assuritygit.component';
+
+const appRoutes:Routes=[
+{path:'',component:AppComponent},
+{path:'hire',component:HireComponent, children:[
+    {path:'verified',component:VerifiedComponent},
+    {path:'developers',component:DevelopersComponent},
+    {path:'designer',component:DesignersComponent},
+    {path:'seoExpers',component:SeoExpertsComponent}
+]}
+
+];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    HireComponent,
-    VerifiedComponent,
-
-    DesignersComponent,
-    DevelopersComponent,
-    SeoExpertsComponent,
-    StartComponent,
-    LoginComponent,
-    EstimatorComponent,
-    PlatformComponent,
-    ManagementComponent,
-    TopTalentComponent,
-    AssuritygitComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    imports:[
+        RouterModule.forRoot(appRoutes)
+    ],
+    exports:[RouterModule]
 })
-export class AppModule { }
+
+export class AppRoutingModule{
+    
+}
